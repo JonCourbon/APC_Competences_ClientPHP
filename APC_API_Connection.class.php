@@ -51,5 +51,9 @@ class APC_API_Connection {
       return json_decode(self::$instance->getElements('/portfolios/'.$id));
   }
   
+  public function getPreuves($idTrace){
+    return json_decode(self::$instance->getElements('/preuves?trace='.$idTrace));
+  }
+  
 }
 ?>
