@@ -1,9 +1,10 @@
 <?php 
+require(dirname(__FILE__).'/configuration/config.php');
 // Import de la classe
-require(dirname(__FILE__).'/APC_API_Connection.class.php');
+require(dirname(__FILE__).'/lib/APC_API_Connection.class.php');
 
-$apicon = APC_API_Connection::getInstance("http://localhost:1337");
-$portfolio=$apicon->getPortfolio(1);
+$apicon = APC_API_Connection::getInstance($apiurl);
+$preuves= $apicon->getPreuves($iduser);
 ?>
 
 <!DOCTYPE html>
@@ -13,57 +14,24 @@ $portfolio=$apicon->getPortfolio(1);
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Portfolio de <?php echo $portfolio->Apprenant; ?></title>
+  <title>Portfolio de Jean Pierre</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
-<h1>Portfolio de <?php echo $portfolio->Apprenant; ?></h1>
-
-<p><?php echo $portfolio->Description; ?></p>
+<h1>Portfolio de Jean Pierre</h1>
 
 
 <?php
-$nbtraces=count($portfolio->traces);
-for($i=0;$i<$nbtraces;$i++):
+$nbpreuves=count($preuves);
+for($i=0;$i<$nbpreuves;$i++):
   ?>
-  
-<article>
-    <h2><?php echo $portfolio->traces[$i]->Titre; ?></h2>
-    <p><?php echo $portfolio->traces[$i]->Description; ?></p>    
-    <p>Eléments de preuve:</p>
-    <?php  
-      $preuves=$apicon->getPreuves($portfolio->traces[$i]->id);
-      $nbpreuves=count($preuves);
-      for($j=0;$j<$nbpreuves;$j++):
-        ?>
-        <div class="card col-6">
-            <div class="card-body">
-              <blockquote class="blockquote mb-0">
-              <?php echo $preuves[$j]->description; ?>
-            </blockquote>
-            </div>
-            Apprentissages critiques:
-            <ul>
-                <?php 
-                for($k=0;$k<count($preuves[$j]->apprentissage_critiques);$k++){
-                  echo '<li>'.$preuves[$j]->apprentissage_critiques[$k]->intitule.'</li>';
-                }
-                 ?>
-            </ul>
-            Composantes essentielles:
-            <ul>
-              <?php 
-              for($k=0;$k<count($preuves[$j]->composantes);$k++){
-                echo '<li>'.$preuves[$j]->composantes[$k]->intitule.'</li>';
-              }
-               ?>    
-            </ul>
-        </div>
-        <?php 
-      endfor;
-       ?>      
-</article>
+  <article>
+      <h2><?php echo $preuves[$i]->intitule; ?></h2>
+      Compétence et niveau:
+      <p><?php echo $preuves[$i]->niveau_competence->intitule; ?></p>  
+      <a href="preuves.php?id=<?php echo $preuves[$i]->id;?>">En savoir plus</a>
+  </article>
 
 <?php 
 endfor;

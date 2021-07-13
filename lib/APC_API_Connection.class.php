@@ -62,12 +62,21 @@ class APC_API_Connection {
       return json_decode(self::$instance->getElements('/saes?diplome='.$diplome));
   }
   
-  public function getPortfolio($id){
-      return json_decode(self::$instance->getElements('/portfolios/'.$id));
+  
+  public function getPreuves($idUser){
+    return json_decode(self::$instance->getElements('/preuves?created_by='.$idUser));
   }
   
-  public function getPreuves($idTrace){
-    return json_decode(self::$instance->getElements('/preuves?trace='.$idTrace));
+  public function getPreuve($idpreuve){
+    return json_decode(self::$instance->getElements('/preuves/'.$idpreuve));
+  }
+  
+  public function getSituation($id){
+    return json_decode(self::$instance->getElements('/situations/'.$id));
+  }
+  
+  public function getSAE($id){
+    return json_decode(self::$instance->getElements('/saes/'.$id));
   }
   
 }
