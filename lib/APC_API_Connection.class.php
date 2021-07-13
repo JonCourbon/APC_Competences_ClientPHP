@@ -35,16 +35,31 @@ class APC_API_Connection {
   }
   
   
-  public function getCompetences(){
+  public function getAllCompetences(){
       return json_decode(self::$instance->getElements('/competences'));
+  }
+  public function getCompetencesDiplome($diplome){
+      return json_decode(self::$instance->getElements('/competences?diplome='.$diplome));
+  }
+  
+  public function getComposantes($idcompetence){
+    return json_decode(self::$instance->getElements('/composantes?competence='.$idcompetence));
   }
   
   public function getNiveauxCompetences($idcompetence){
-      return json_decode(self::$instance->getElements('/niveau-competences?competence='.$idcompetence));
+      return json_decode(self::$instance->getElements('/niveaux-competences?competence='.$idcompetence));
   }
   
-  public function getSAES(){
+  public function getApprentissages($idniveau){
+    return json_decode(self::$instance->getElements('/apprentissages?niveau_competence='.$idniveau));
+  }
+  
+  public function getAllSAES(){
       return json_decode(self::$instance->getElements('/saes'));
+  }
+  
+  public function getSAESDiplome($diplome){
+      return json_decode(self::$instance->getElements('/saes?diplome='.$diplome));
   }
   
   public function getPortfolio($id){
