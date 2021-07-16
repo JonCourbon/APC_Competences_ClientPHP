@@ -66,13 +66,13 @@ $preuve= $apicon->getPreuve($idpreuve);
               <?php endif;?>
             <?php endif;?>
             <h2 class="fw-bolder mb-4 mt-5">Démarche</h2>
-            <p class="fs-5 mb-4">SAE: <?php echo $preuve->demarche;?></p>
+            <p class="fs-5 mb-4"><?php echo $preuve->demarche;?></p>
             <h2 class="fw-bolder mb-4 mt-5">Réfléxivité</h2>
-            <p class="fs-5 mb-4">SAE: <?php echo $preuve->reflexions;?></p>
+            <p class="fs-5 mb-4"><?php echo $preuve->reflexions;?></p>
             
             <?php if($preuve->recul): ?>
               <h2 class="fw-bolder mb-4 mt-5">Prise de recul</h2>
-              <p class="fs-5 mb-4">SAE: <?php echo $preuve->recul;?></p>
+              <p class="fs-5 mb-4"><?php echo $preuve->recul;?></p>
             <?php endif; ?>
             
           </section>
